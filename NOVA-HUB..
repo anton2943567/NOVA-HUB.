@@ -1,0 +1,66 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "NovaHub"
+gui.ResetOnSpawn = false
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.fromOffset(280, 340)
+frame.Position = UDim2.new(0.5, -140, 0.5, -170)
+frame.BackgroundColor3 = Color3.fromRGB(29, 19, 48)
+frame.Parent = gui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 14)
+corner.Parent = frame
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, -45, 0, 45)
+title.BackgroundTransparency = 1
+title.Text = "NOVA HUB"
+title.TextColor3 = Color3.fromRGB(205, 160, 255)
+title.TextSize = 24
+title.Font = Enum.Font.GothamBold
+title.Parent = frame
+
+local close = Instance.new("TextButton")
+close.Size = UDim2.fromOffset(35, 35)
+close.Position = UDim2.new(1, -40, 0, 5)
+close.Text = "X"
+close.TextColor3 = Color3.new(1, 1, 1)
+close.BackgroundColor3 = Color3.fromRGB(100, 45, 140)
+close.Parent = frame
+close.MouseButton1Click:Connect(function()
+    gui:Destroy()
+end)
+
+local names = {
+    "Fly",
+    "Run Speed",
+    "Jump Height",
+    "Player Height",
+    "Player Width"
+}
+
+for i, name in ipairs(names) do
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(1, -24, 0, 43)
+    button.Position = UDim2.fromOffset(12, 52 + (i - 1) * 53)
+    button.BackgroundColor3 = Color3.fromRGB(75, 42, 110)
+    button.TextColor3 = Color3.new(1, 1, 1)
+    button.TextSize = 16
+    button.Font = Enum.Font.Gotham
+    button.Text = name
+    button.Parent = frame
+
+    local c = Instance.new("UICorner")
+    c.CornerRadius = UDim.new(0, 8)
+    c.Parent = button
+
+    button.MouseButton1Click:Connect(function()
+        button.Text = name .. " — настройка не подключена"
+    end)
+end
+
+gui.Parent = player:WaitForChild("PlayerGui")
